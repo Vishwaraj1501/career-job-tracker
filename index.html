@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CareerTrack helps you organize job applications, interviews, and offers." />
+  <title>CareerTrack — Job Application Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="CareerTrack home"><span class="brand-mark">C</span><span>CareerTrack</span></a>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" id="dashboardNav"><span>▦</span> Dashboard</button>
+      <button class="nav-item" id="applicationsNav"><span>▤</span> Applications</button>
+      <div class="sidebar-tip">
+        <div class="tip-icon">✦</div>
+        <strong>Small steps add up.</strong>
+        <p>Track every application and keep moving toward your next opportunity.</p>
+      </div>
+      <div class="profile">
+        <div class="avatar">CT</div>
+        <div><strong>My Career</strong><small>Personal workspace</small></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">C</span> CareerTrack</div>
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Dashboard</strong></div>
+        <div class="top-actions"><span class="today" id="todayLabel"></span><button class="primary-btn" id="openAddModal">＋ Add application</button></div>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">YOUR CAREER, ORGANIZED</p>
+          <h1>Job search, <span>made clearer.</span></h1>
+          <p class="subtitle">Keep your applications in one place and know what to do next.</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true"><div class="art-circle">↗</div><div class="art-card"><span>WEEKLY GOAL</span><strong>Keep going!</strong><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Application statistics">
+        <article class="stat-card"><div class="stat-top"><span>Total applications</span><span class="stat-icon blue">▤</span></div><strong id="totalCount">0</strong><small>All jobs you're tracking</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Interviews</span><span class="stat-icon purple">◉</span></div><strong id="interviewCount">0</strong><small>Opportunities to prepare for</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Offers</span><span class="stat-icon green">✓</span></div><strong id="offerCount">0</strong><small>Celebrate your progress</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Follow-ups</span><span class="stat-icon orange">↻</span></div><strong id="followupCount">0</strong><small>Applications to check in on</small></article>
+      </section>
+
+      <section class="content-card">
+        <div class="section-heading">
+          <div><h2>Recent applications</h2><p>Your latest job search activity</p></div>
+          <button class="text-btn" id="viewAllBtn">View all →</button>
+        </div>
+        <div class="toolbar">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search company or role..." /></label>
+          <select id="statusFilter" aria-label="Filter by status"><option value="All">All statuses</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option><option>Wishlist</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>COMPANY / ROLE</th><th>DATE APPLIED</th><th>STATUS</th><th>FOLLOW-UP</th><th></th></tr></thead>
+            <tbody id="applicationsBody"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState"><div class="empty-icon">▤</div><h3>No applications found</h3><p>Add your first job or adjust your search.</p><button class="primary-btn" id="emptyAddBtn">＋ Add application</button></div>
+        </div>
+      </section>
+      <footer>Built to make your job search a little less stressful. <span>CareerTrack · Portfolio Project</span></footer>
+    </main>
+  </div>
+
+  <dialog id="applicationModal">
+    <form id="applicationForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">CAREER TRACKER</p><h2 id="modalTitle">Add application</h2></div><button type="button" class="close-btn" id="closeModal" aria-label="Close">×</button></div>
+      <input type="hidden" id="editId" />
+      <label>Company name <input id="companyInput" required maxlength="70" placeholder="e.g. Google" /></label>
+      <label>Job role <input id="roleInput" required maxlength="70" placeholder="e.g. Junior Software Developer" /></label>
+      <div class="form-row">
+        <label>Date applied <input id="dateInput" type="date" required /></label>
+        <label>Status <select id="statusInput"><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option><option>Wishlist</option></select></label>
+      </div>
+      <label>Follow-up date <input id="followupInput" type="date" /></label>
+      <label>Notes <textarea id="notesInput" rows="3" maxlength="500" placeholder="Recruiter name, interview details, next steps..."></textarea></label>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn">Save application</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
